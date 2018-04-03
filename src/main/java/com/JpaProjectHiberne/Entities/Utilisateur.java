@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,8 +16,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 import org.springframework.format.annotation.DateTimeFormat;
+
 
 
 
@@ -26,37 +30,39 @@ public class Utilisateur {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@Enumerated(EnumType.STRING)// On cree un varchar car l enu n est pas un int
+	@Column(length = 8 )// Un vachar de taille 8
+	@NotNull(message="Veuillez cochez l' une des deux cases ") // le champ ne doit pas etre vide sinon on affiche le message en dur
+	private Sexe sexe ;
 
 	@Column(length = 50)
-	@NotNull
+	@Pattern(regexp ="^(?i)[a-z]{2,50}$",message="{com.JpaProjectHiberne.contraint.Nom.message}") // le ?, i est un tag pour ignore la case (Maj min)
 	private String nom;
 
 	@Column(length = 50)
-	@NotNull
+	@Pattern(regexp ="^(?i)[a-z]{2,50}$",message="{com.JpaProjectHiberne.contraint.Prenom.message}") // le ?, i est un tag pour ignore la case (Maj min)
 	private String prenom;
 
 	@DateTimeFormat
 	@Column(columnDefinition = "date", name = "birthday")
 	private String dateDeNaissance;
 
-	@Column(length = 50)
-	@NotNull
-	private String sexe;
 
-	@Column(length = 50)
-	@NotNull
+	@Column(length = 10)
+	@Pattern(regexp ="^(?i)[a-z]{2,10}$",message="{com.JpaProjectHiberne.contraint.Password.message}") // le ?, i est un tag pour ignore la case (Maj min)
 	private String password;
 
-	@Column(length = 15)
-	@NotNull
+	@Column(length = 450 )
+	@Pattern(regexp ="^(?i)[a-z]{2,450}$",message="{com.JpaProjectHiberne.contraint.Description.message}") // le ?, i est un tag pour ignore la case (Maj min)
 	private String description;
 
-	@Column(length = 450)
-	@NotNull
+	@Column(length = 50)
+	@Pattern(regexp ="^(?i)[a-z]{2,50}$",message="{com.JpaProjectHiberne.contraint.Pseudo.message}") // le ?, i est un tag pour ignore la case (Maj min)
 	private String pseudo;
 
 	@Column(length = 50)
-	@NotNull
+	@Pattern(regexp ="^(?i)[a-z]{2,50}$",message="{com.JpaProjectHiberne.contraint.Type.message}") // le ?, i est un tag pour ignore la case (Maj min)
 	private String type;
 
 	// On indique les relations
@@ -65,7 +71,7 @@ public class Utilisateur {
 	  @ManyToMany
 	  @JoinTable(name="favori",
 	  joinColumns=@JoinColumn(name="user_id"),
-	  inverseJoinColumns=@JoinColumn(name="USER_ID_LIE")
+	  inverseJoinColumns=@JoinColumn(name="user_id_link")
 	  ) 
 	  private List<Utilisateur> favoris;
 	
@@ -115,9 +121,9 @@ public class Utilisateur {
 	
 
 	// CONSTRUCTEURS
-	public Utilisateur(Long id, @NotNull String nom, @NotNull String prenom, String dateDeNaissance,
-			@NotNull String sexe, @NotNull String password, @NotNull String description, @NotNull String pseudo,
-			@NotNull String type, List<Photo> photo) {
+	public Utilisateur(Long id,  String nom,  String prenom, String dateDeNaissance,
+			Sexe sexe,  String password,  String description,  String pseudo,
+			 String type, List<Photo> photo) {
 		super();
 		this.id = id;
 		this.nom = nom;
@@ -166,12 +172,13 @@ public class Utilisateur {
 	public void setDateDeNaissance(String dateDeNaissance) {
 		this.dateDeNaissance = dateDeNaissance;
 	}
+	
 
-	public String getSexe() {
+	public Sexe getSexe() {
 		return sexe;
 	}
 
-	public void setSexe(String sexe) {
+	public void setSexe(Sexe sexe) {
 		this.sexe = sexe;
 	}
 

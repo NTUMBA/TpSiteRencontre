@@ -1,0 +1,27 @@
+<!DOCTYPE>
+<html xmlns:th="http://thymeleaf.org">
+	<head>
+	<meta charset="utf-8">
+	<title>Liste des employers</title>
+	<link rel="stylesheet" type="text/css" href="../../static/css/main.css">
+	</head>
+	<body>
+	
+	
+		<section>
+		  <img src="../../static/img/moines.jpg" alt="moines">
+		  <h1>REGISTRE DES ABONNES</h1>
+			<ul th:each="utilisateur: ${utilisateurs}">
+				<li th:text ="${utilisateur.sexe}"></li>
+				<li th:text ="${utilisateur.nom}"></li>
+				<li th:text ="${utilisateur.prenom}"></li>
+				<li th:text ="${utilisateur.password}"></li>
+				<li th:text ="${utilisateur.dateDeNaissance}"></li>
+				<li th:text ="${utilisateur.description}"></li>
+				<li th:text ="${utilisateur.photo}"></li>
+				<li th:text ="${utilisateur.pseudo}"></li>
+				<li th:text ="${utilisateur.photo}"></li>
+			</ul>
+		</section>		
+	</body>
+</html>

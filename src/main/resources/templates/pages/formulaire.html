@@ -13,16 +13,19 @@
 		<img src="../../static/img/moines.jpg" alt="moines">
 		<h1> Formulaire d'inscription </h1>
 			
-			<form name="formulaire" th:action ="@{/AjoutCarnets}" th:object="${carnet}" method="post">
+			
+			
+			
+			<form name="formulaire" th:action ="@{/AjoutUtilisateurs}" th:object="utilisateur" method="post">
 			
 			  <div class="userIdentification">
-				<label for="mr">Monsieur</label>
-				 <input type="radio" id="mr"  th:field="*{civilite}" value="MONSIEUR"> 
+				<label for="homme">Homme</label>
+				 <input type="radio" id="homme"  th:field="*{sexe}" value="HOMME"> 
 				 
-				 <label for="mme">Madame</label>
-				<input type="radio" id="mme"  th:field="*{civilite}" value="MADAME" >  
+				 <label for="FEMME">Madame</label>
+				<input type="radio" id="femme"  th:field="*{sexe}" value="FEMME" >  
 				<!-- Message d erreur-->
-				<p th:if="${#fields.hasErrors('civilite')}" th:errors="*{civilite}"></p>
+				<p th:if="${#fields.hasErrors('sexe')}" th:errors="*{sexe}"></p>
 				</br>
 				
 				<label for="nom">Entrez votre nom</label>
@@ -32,45 +35,36 @@
 				<label for="prenom">Entrez votre prenom</label>
 				<input type="text" id="prenom" name="prenom" ></br>
 				<p th:if="${#fields.hasErrors('prenom')}" th:errors="*{prenom}"></p>
-				<label for="email">Entrez votre adresse email</label>
+				<label for="password">Entrez votre mot de passe</label>
 				<input type="text" id="email" name="email"> 
-				<p th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
+				<p th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
+				
+				<label for="nom">Entrez votre pseudo</label>
+				<input type="text" id="pseudo" name="pseudo"  ></br>
+				<p th:if="${#fields.hasErrors('pseudo')}" th:errors="*{pseudo}"></p>
+				
+					<label for="type">Entrez votre type</label>
+				<input type="text" id="type" name="pseudo"  ></br>
+				<p th:if="${#fields.hasErrors('type')}" th:errors="*{type}"></p>
 			  </div>
 			  
 			  <div class="userLocalisation">
+			  <label for="description">Entrez vune description</label>
+				<textarea id="description" name="description"  ><</textarea>
+			  
 				<label for="dateDeNaissance">Entrez votre date de naissance</label>
 				<input type="text" id="dateDeNaissance" name="dateDeNaissance"  ></br>
 				
-				<label for="tel">Entrez votre N° de téléphone</label>
-				<input type="text" id="tel" name="tel"  ></br>
-				<p th:if="${#fields.hasErrors('tel')}" th:errors="*{tel}"></p>
-				<label  for="cp">Entrez votre code postal</label>
-				<input type="text" id="cp" name="cp"  ></br>
-				<p th:if="${#fields.hasErrors('cp')}" th:errors="*{cp}"></p>
-				
-				<label for="ville">Indiquez le nom de votre ville</label>
-				<input type="text" id="ville" name="ville" >
-				
-				<p th:if="${#fields.hasErrors('ville')}" th:errors="*{ville}"></p>
+				<label for="photo">Entrez une photo</label>
+				<input type="text" id="photo" name="photo" ></br>
 			  </div>
 				
 				<h2>Envoyez vos réponses</h2>
-				<!-- <input th:type="hidden"  th:name="ID" th:value="*{id}"> 
-				<input th:type="hidden"  th:name="_method" th:value="PUT"> --> 
+				
 				<input type="submit" value="Validez"> <!--Valider le contenu du formulaire -->
 								
 			</form>	
 						
-			<h2>Supprimez un user</h2>
-			<!-- On aurait pu ecrire-->	
-			<!--<form th:action ="@{'/carnets/' + ${carnet.id} et rajouter si necessaire + delete +delete/$ ${carnet.nom }" th:object= "${carnet}" method="post">-->
-			
-<!-- 			<form  th:action ="@{|/carnet/${carnets.id}|}" th:object= "${carnet}" method="post"> -->
-<!-- 			    <input th:type="hidden"  th:name="_method" th:value="DELETE">  -->
-<!-- 			    <input type="submit" value="supprimer"> Valider le contenu du formulaire -->
-<!-- 			</form> -->
-		
-		
 		</section>
 			
 	</body>
